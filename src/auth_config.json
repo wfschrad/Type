@@ -1,4 +1,5 @@
 {
     "domain": "affinity-app.us.auth0.com",
-    "clientId": "98LebEf1gG4mmRUXgYStKEbO5POWuP3X"
+    "clientId": "98LebEf1gG4mmRUXgYStKEbO5POWuP3X",
+    "audience": "type_api"
 }
