@@ -7,6 +7,7 @@ import Profile from "./components/Profile";
 import history from "./utils/history";
 import PrivateRoute from "./components/PrivateRoute";
 import ExternalApi from "./views/ExternalApi";
+import Radio from "./components/Radio"
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         </header>
         <Switch>
           <Route path="/" exact />
+          <Route path="/radio" exact component={Radio} />
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/external-api" component={ExternalApi} />
         </Switch>
