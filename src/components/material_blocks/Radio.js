@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ErrorRadios() {
+export default function ErrorRadios({ content }) {
     const classes = useStyles();
     const [value, setValue] = React.useState('');
     const [error, setError] = React.useState(false);
@@ -47,16 +47,25 @@ export default function ErrorRadios() {
     return (
         <form onSubmit={handleSubmit}>
             <FormControl component="fieldset" error={error} className={classes.formControl}>
-                <FormLabel component="legend">Pop quiz: Material-UI is...</FormLabel>
+                <FormLabel component="legend">{content}...</FormLabel>
                 <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
                     <FormControlLabel value="best" control={<Radio />} label="The best!" />
                     <FormControlLabel value="worst" control={<Radio />} label="The worst." />
                 </RadioGroup>
                 <FormHelperText>{helperText}</FormHelperText>
-                <Button type="submit" variant="outlined" color="primary" className={classes.button}>
-                    Check Answer
-        </Button>
             </FormControl>
+            {/* <FormControl component="fieldset" error={error} className={classes.formControl}>
+                <FormLabel component="legend">Here's the second content...</FormLabel>
+                <RadioGroup aria-label="quiz" name="quiz" value={value[1]} onChange={handleRadioChange}>
+                    <FormControlLabel value="best" control={<Radio />} label="Agree" />
+                    <FormControlLabel value="worst" control={<Radio />} label="Disagree" />
+                </RadioGroup>
+                <FormHelperText>{helperText}</FormHelperText>
+            </FormControl> */}
+
+            {/* <Button type="submit" variant="outlined" color="primary" className={classes.button}>
+                Check Answer
+            </Button> */}
         </form>
     );
 }
