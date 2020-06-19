@@ -81,18 +81,28 @@ export default function TypingForm() {
     const calculateForm = () => {
 
         // grab values, do them calcs
-        const attScores = {
-            ei: 0,
-            ns: 0,
-            ft: 0,
-            jp: 0
+        const attScores = [['ei', 0], ['ns', 0], ['ft', 0], ['jp', 0]];
+
+        if (!answers.every(answer => answer)) {
+            console.log('not all answers complete in score calculation');
+            return;
         }
+
+        const scoreAnswers = [...answers];
+
+        scoreAnswers.forEach((answer, i) => {
+            const relScore = (answer === 'Agree') ? 1 : -1;
+
+            //index into score field for index that matches attribute category
+            attScores[questions[i].typeAttributeId - 1][1] += relScore * questions[i].scoringScalar;
+        })
+        console.log('attScores: ', attScores)
     }
 
 
     return (
         <>
-            {questions ? (
+            {questions && questions.length > 0 ? (
                 <>
                     <form onSubmit={handleFormSubmission}>
                         <FormControl component="fieldset" className={classes.formControl}>
@@ -103,7 +113,7 @@ export default function TypingForm() {
                         </FormControl>
                     </form>
                 </>
-            ) : <div>No Data</div>
+            ) : <div>Loading...</div>
             }
 
         </>
