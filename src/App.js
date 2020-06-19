@@ -4,6 +4,7 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo'
 
 import NavBar from "./components/NavBar";
+import AppBar from "./components/material_blocks/AppBar"
 import Profile from "./components/Profile";
 import history from "./utils/history";
 import PrivateRoute from "./components/PrivateRoute";
@@ -20,7 +21,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router history={history}>
         <header>
-          <NavBar />
+          <AppBar />
         </header>
         <Switch>
           <Route path="/" exact />

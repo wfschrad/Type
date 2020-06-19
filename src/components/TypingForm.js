@@ -96,8 +96,20 @@ export default function TypingForm() {
             //index into score field for index that matches attribute category
             attScores[questions[i].typeAttributeId - 1][1] += relScore * questions[i].scoringScalar;
         })
-        console.log('attScores: ', attScores)
+        postScoresToUser(attScores);
     }
+
+    const postScoresToUser = (scores) => {
+        const SCORE_QUERY = `
+        mutation postScore {
+            postScore {
+                // fill this in with mutation string
+            }
+        }
+        `;
+    }
+
+    //use axios to post scores via mutation
 
 
     return (
