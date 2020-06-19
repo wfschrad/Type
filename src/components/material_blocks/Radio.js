@@ -15,9 +15,12 @@ const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1, 1, 0, 0),
     },
+    formLabel: {
+        margin: theme.spacing(3)
+    }
 }));
 
-export default function ErrorRadios({ content }) {
+export default function ErrorRadios({ question, answers, setAnswers }) {
     const classes = useStyles();
     const [value, setValue] = React.useState('');
     const [error, setError] = React.useState(false);
@@ -25,7 +28,9 @@ export default function ErrorRadios({ content }) {
 
     const handleRadioChange = (event) => {
         setValue(event.target.value);
-        setHelperText(' ');
+        console.log('answers: ', answers);
+        answers[question.id - 1] = event.target.value;
+        setAnswers(answers);
         setError(false);
     };
 
@@ -45,27 +50,30 @@ export default function ErrorRadios({ content }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <FormControl component="fieldset" error={error} className={classes.formControl}>
-                <FormLabel component="legend">{content}...</FormLabel>
-                <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
-                    <FormControlLabel value="best" control={<Radio />} label="The best!" />
-                    <FormControlLabel value="worst" control={<Radio />} label="The worst." />
-                </RadioGroup>
-                <FormHelperText>{helperText}</FormHelperText>
-            </FormControl>
-            {/* <FormControl component="fieldset" error={error} className={classes.formControl}>
-                <FormLabel component="legend">Here's the second content...</FormLabel>
-                <RadioGroup aria-label="quiz" name="quiz" value={value[1]} onChange={handleRadioChange}>
-                    <FormControlLabel value="best" control={<Radio />} label="Agree" />
-                    <FormControlLabel value="worst" control={<Radio />} label="Disagree" />
-                </RadioGroup>
-                <FormHelperText>{helperText}</FormHelperText>
-            </FormControl> */}
+        // <form onSubmit={handleSubmit}>
+        //     <FormControl component="fieldset" error={error} className={classes.formControl}>
+        <>
+            <FormLabel component="legend" className={classes.formLabel}>{question.content}...</FormLabel>
+            <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
+                <FormControlLabel value="best" control={<Radio />} label="Agree" />
+                <FormControlLabel value="worst" control={<Radio />} label="Disagree" />
+            </RadioGroup>
+            {/* <FormHelperText>{helperText}</FormHelperText> */}
+        </>
+        //     </FormControl>
 
-            {/* <Button type="submit" variant="outlined" color="primary" className={classes.button}>
-                Check Answer
-            </Button> */}
-        </form>
+        //     {/* <FormControl component="fieldset" error={error} className={classes.formControl}>
+        //         <FormLabel component="legend">Here's the second content...</FormLabel>
+        //         <RadioGroup aria-label="quiz" name="quiz" value={value[1]} onChange={handleRadioChange}>
+        //             <FormControlLabel value="best" control={<Radio />} label="Agree" />
+        //             <FormControlLabel value="worst" control={<Radio />} label="Disagree" />
+        //         </RadioGroup>
+        //         <FormHelperText>{helperText}</FormHelperText>
+        //     </FormControl> */}
+
+        //     {/* <Button type="submit" variant="outlined" color="primary" className={classes.button}>
+        //         Check Answer
+        //     </Button> */}
+        // </form>
     );
 }
