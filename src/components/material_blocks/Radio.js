@@ -22,14 +22,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ErrorRadios({ question, answers, setAnswers }) {
     const classes = useStyles();
-    const [value, setValue] = React.useState('');
+    const [value, setValue] = React.useState(0);
     const [error, setError] = React.useState(false);
     const [helperText, setHelperText] = React.useState('Choose wisely');
 
     const handleRadioChange = (event) => {
         setValue(event.target.value);
-        console.log('answers: ', answers);
         answers[question.id - 1] = event.target.value;
+        console.log('answers: ', answers);
         setAnswers(answers);
         setError(false);
     };
@@ -37,16 +37,16 @@ export default function ErrorRadios({ question, answers, setAnswers }) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (value === 'best') {
-            setHelperText('You got it!');
-            setError(false);
-        } else if (value === 'worst') {
-            setHelperText('Sorry, wrong answer!');
-            setError(true);
-        } else {
-            setHelperText('Please select an option.');
-            setError(true);
-        }
+        // if (value === 'best') {
+        //     setHelperText('You got it!');
+        //     setError(false);
+        // } else if (value === 'worst') {
+        //     setHelperText('Sorry, wrong answer!');
+        //     setError(true);
+        // } else {
+        //     setHelperText('Please select an option.');
+        //     setError(true);
+        // }
     };
 
     return (
@@ -55,8 +55,8 @@ export default function ErrorRadios({ question, answers, setAnswers }) {
         <>
             <FormLabel component="legend" className={classes.formLabel}>{question.content}...</FormLabel>
             <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
-                <FormControlLabel value="best" control={<Radio />} label="Agree" />
-                <FormControlLabel value="worst" control={<Radio />} label="Disagree" />
+                <FormControlLabel value="Agree" control={<Radio />} label="Agree" />
+                <FormControlLabel value="Disagree" control={<Radio />} label="Disagree" />
             </RadioGroup>
             {/* <FormHelperText>{helperText}</FormHelperText> */}
         </>

@@ -34,8 +34,20 @@ export default function TypingForm() {
     }
     `;
 
-    const handleFormSubmission = () => {
+    const handleFormSubmission = (ev) => {
+        ev.preventDefault();
         console.log('form submission hit')
+        console.log('answers after submission: ', answers)
+
+        //validate all answers
+
+        if (answers.every(answer => answer)) {
+            console.log('form submission: true')
+        } else {
+            console.log('form submission: false')
+        }
+
+        //if validation passes, post to db
     }
 
     return (
