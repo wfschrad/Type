@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 
+import TypingForm from '../TypingForm';
+
 function rand() {
     return Math.round(Math.random() * 20) - 10;
 }
@@ -25,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
+        overflow: 'auto',
+        maxHeight: '100%'
     },
 }));
 
@@ -46,7 +50,7 @@ export default function SimpleModal() {
         <div style={modalStyle} className={classes.paper}>
             <h2 id="simple-modal-title">Text in a modal</h2>
             <p id="simple-modal-description">
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                <TypingForm/>
       </p>
             <SimpleModal />
         </div>
