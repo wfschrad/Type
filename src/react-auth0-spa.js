@@ -35,15 +35,8 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
                 console.log('user40:', user);
                 const token = await auth0FromHook.getTokenSilently();
 
-
-                const USER_QUERY = `
-                    mutation {
-                    addUser(firstName: "${user.nickname}", email: "${user.email}", auth0Id: "${user.sub}", profilePhoto: "${user.picture}"){
-                        id
-                    }
-                }`;
-
-                console.log('USER QUERY: ', USER_QUERY);
+                localStorage.setItem("type_app_userObj", JSON.stringify(user));//not storing key in local storage 6.19.20?
+                localStorage.setItem("type_app_userTok", JSON.stringify(token));//not storing key in local storage 6.19.20?
 
                 // check local storage before posting to db
                 const storedUser = JSON.parse(localStorage.getItem("type_app_userObj"));
@@ -54,10 +47,15 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
 
                     setUser(storedUser);
 
-                    localStorage.setItem("type_app_userObj", JSON.stringify(user));//not storing key in local storage 6.19.20?
-                    localStorage.setItem("type_app_userTok", JSON.stringify(token));//not storing key in local storage 6.19.20?
                     user = storedUser;
                 } else {
+                    const USER_QUERY = `
+                    mutation {
+                    addUser(firstName: "${user.nickname}", email: "${user.email}", auth0Id: "${user.sub}", profilePhoto: "${user.picture}"){
+                        id
+                    }
+                }`;
+
                     console.log('posting user to db');
                     const res = await Axios({
                         url: apiBaseUrl,

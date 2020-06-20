@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 
 import BasicInfoForm from './BasicInfoForm';
+import TypeFormWrapper from './TypeFormWrapper';
 import TypingForm from './TypingForm';
+import Confirm from './Confirm';
+import Success from './Success';
 
 export class UserForm extends Component {
     state = {
@@ -9,7 +12,7 @@ export class UserForm extends Component {
         firstName: '',
         age: '',
         gender: '',
-        interestedIn: '',
+        // interestedIn: '', add 'interested in' and 'age range' logic in next phase
         bio: ''
     }
 
@@ -36,26 +39,33 @@ export class UserForm extends Component {
     }
 
     render() {
-        const { step } = this.state;
-        const { firstName, occupation, city, bio } = this.state;
-        const values = { firstName, occupation, city, bio };
+        const { step, firstName, age, gender, bio } = this.state;
+        const values = { firstName, age, gender, bio };
 
         switch(step) {
             case 1:
                 return (
                 <BasicInfoForm
                 nextStep={this.nextStep}
-                prevStep={this.prevStep}
                 handleChange={this.handleChange}
                 values={values}
                 />
             )
             case 2:
-                return <TypingForm/>
+                return <Confirm
+                nextStep={this.nextStep}
+                prevStep={this.prevStep}
+                values={values}
+                />
             case 3:
-                return <h1>Confirm</h1>
+                return <TypeFormWrapper
+                nextStep={this.nextStep}
+                prevStep={this.prevStep}
+                handleChange={this.handleChange}
+                values={values}
+                />
             case 4:
-                return <h1>Confirm</h1>
+                return <Success/>
         }
     }
 }

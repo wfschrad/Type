@@ -10,10 +10,6 @@ export class BasicInfoForm extends Component {
         this.props.nextStep();
     }
 
-    back = ev => {
-        this.props.prevStep();
-    }
-
     render() {
         const { values, handleChange } = this.props;
         return (
@@ -62,7 +58,8 @@ export class BasicInfoForm extends Component {
 
 const styles = {
     button: {
-        margin: 15
+        margin: 15,
+        maxWidth: "100px"
     }
 }
 

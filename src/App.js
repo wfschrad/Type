@@ -17,6 +17,7 @@ import Account from "./components/Account";
 import Modal from "./components/material_blocks/Modal";
 import Grid from "./components/material_blocks/Grid";
 import UserForm from "./components/UserForm";
+import Home from "./components/Home";
 
 
 const client = new ApolloClient({
@@ -37,6 +38,7 @@ function App() {
           <Route path="/modal" component={Modal}/>
           <Route path="/grid" component={Grid}/>
           <Route path="/userForm" component={UserForm}/>
+          <Route path="/home" component={Home}/>
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/account" component={Account} />
         </Switch>
