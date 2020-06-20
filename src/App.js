@@ -11,6 +11,10 @@ import PrivateRoute from "./components/PrivateRoute";
 import ExternalApi from "./views/ExternalApi";
 import Radio from "./components/material_blocks/Radio";
 import TypingForm from "./components/TypingForm";
+import Prospects from "./components/Prospects";
+import Splash from "./components/Splash";
+import Account from "./components/Account";
+
 
 const client = new ApolloClient({
   uri: 'http://localhost:8080/graphql'
@@ -24,11 +28,11 @@ function App() {
           <AppBar />
         </header>
         <Switch>
-          <Route path="/" exact />
-          <Route path="/radio" exact component={Radio} />
+          <Route path="/" exact component={Splash} />
           <Route path="/typingForm" exact component={TypingForm} />
+          <Route path="/match" exact component={Prospects} />
           <PrivateRoute path="/profile" component={Profile} />
-          <PrivateRoute path="/external-api" component={ExternalApi} />
+          <PrivateRoute path="/account" component={Account} />
         </Switch>
       </Router>
     </ApolloProvider>

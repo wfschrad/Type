@@ -10,7 +10,6 @@ const PrivateRoute = ({ component: Component, path, ...rest }) => {
             return;
         }
         const fn = async () => {
-            debugger;
             await loginWithRedirect({
                 appState: { targetUrl: window.location.pathname }
             });

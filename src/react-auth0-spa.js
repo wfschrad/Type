@@ -26,7 +26,7 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
             }
 
             const isAuthenticated = await auth0FromHook.isAuthenticated();
-            debugger;
+
             setIsAuthenticated(isAuthenticated);
 
 
@@ -51,9 +51,9 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
 
                 if (storedUser && storedUser !== "undefined") {
                     console.log('inside storedUser conditional')
-                    debugger;
+
                     setUser(storedUser);
-                    debugger;
+
                     localStorage.setItem("type_app_userObj", JSON.stringify(user));//not storing key in local storage 6.19.20?
                     localStorage.setItem("type_app_userTok", JSON.stringify(token));//not storing key in local storage 6.19.20?
                     user = storedUser;
@@ -76,12 +76,12 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
                         localStorage.setItem("type_app_userObj", JSON.stringify(user));//not storing key in local storage 6.19.20?
                         localStorage.setItem("type_app_userTok", JSON.stringify(token));//not storing key in local storage 6.19.20?
                     }
-                    debugger;
+
                     setUser(user);
-                    debugger;
+
                 }
             }
-            debugger;
+
             setLoading(false);
         };
         initAuth0();
@@ -97,9 +97,9 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
             setPopupOpen(false);
         }
         const user = await auth0Client.getUser();
-        debugger;
+
         setUser(user);
-        debugger;
+
         localStorage.setItem("type_app_userObj", JSON.stringify(user));//not storing key in local storage 6.19.20?
         // localStorage.setItem("type_app_userTok", JSON.stringify(token));//not storing key in local storage 6.19.20?
         setIsAuthenticated(true);
@@ -111,9 +111,9 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
         const user = await auth0Client.getUser();
         setLoading(false);
         setIsAuthenticated(true);
-        debugger;
+
         setUser(user);
-        debugger;
+
         localStorage.setItem("type_app_userObj", JSON.stringify(user));//not storing key in local storage 6.19.20?
         // localStorage.setItem("type_app_userTok", JSON.stringify(token));//not storing key in local storage 6.19.20?
     };
