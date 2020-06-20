@@ -13,6 +13,7 @@
     "axios": "^0.19.2",
     "graphql": "^15.1.0",
     "graphql-tag": "^2.10.3",
+    "material-ui": "^0.20.2",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
     "react-dom": "^16.13.1",
