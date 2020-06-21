@@ -4,15 +4,19 @@ import { Query } from 'react-apollo';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
+import { useAuth0 } from "../react-auth0-spa";
+
 
 
 import Radio from './material_blocks/Radio';
 import Button from './material_blocks/Button';
 import Modal from '@material-ui/core/Modal';
 
-export default function TypingForm() {
+export default function TypingForm({ values }) {
     const [answers, setAnswers] = useState(new Array(48).fill(null));
     const [questions, setQuestions] = useState([]);
+    const { user } = useAuth0();
+
 
     const useStyles = makeStyles((theme) => ({
         formControl: {
@@ -62,7 +66,7 @@ export default function TypingForm() {
             //might be better to randomize once and serve same order to users (bias)
             setQuestions(questionData);
             console.log('questionData (useEffect): ', questionData);
-
+            console.log('values: ', values)
         })();
     }, []);
 
@@ -109,18 +113,47 @@ export default function TypingForm() {
         postScoresToUser(attScores);
     }
 
-    const postScoresToUser = (scores) => {
+    const postScoresToUser = async (scores) => {
         console.log('scores: ', scores)
         const SCORE_QUERY = `
-        mutation postScore {
-            postScore {
-                // fill this in with mutation string
+        mutation onBoardUser{
+            onBoardUser(
+                firstName: "${values.firstName}", 
+                email: "${user.email}", 
+                gender: "${values.gender}", 
+                age: ${values.age}, 
+                bio: "${values.bio}", 
+                rawEI: ${scores[0][1]}, 
+                rawNS: ${scores[1][1]}, 
+                rawFT: ${scores[2][1]}, 
+                rawJP: ${scores[3][1]})
+                {
+              firstName
+              id
+              pTypeId
+              rawEI
+              rawNS
+              rawFT
+              rawJP
+                
             }
-        }
+          }
         `;
+        console.log('score query: ', SCORE_QUERY)
+        //use axios to post scores via mutation
+
+        const onBoardRes = await Axios({
+            url: 'http://localhost:8080/graphql',
+            method: 'post',
+            data: {
+                query: SCORE_QUERY
+            }
+        });
+        const scoreData = onBoardRes.data.data;
+
+        console.log('data after score post: ', scoreData)
     }
 
-    //use axios to post scores via mutation
 
 
     return (

@@ -21,11 +21,13 @@ export class TypeFormWrapper extends Component {
         return (
             <MuiThemeProvider>
                 <>
-                <AppBar title="Get Your Personality Type Profile!"/>
-                <p>When answering the following questions, do your best to be as accurate as possible
+                    <AppBar title="Get Your Personality Type Profile!" />
+                    <p>When answering the following questions, do your best to be as accurate as possible
                     Choose the answer that best represents your personality most of the time.
                 </p>
-                <TypingForm/>
+                    <TypingForm
+                        values={values}
+                    />
                 </>
             </MuiThemeProvider>
         )
