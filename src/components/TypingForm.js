@@ -110,6 +110,7 @@ export default function TypingForm() {
     }
 
     const postScoresToUser = (scores) => {
+        console.log('scores: ', scores)
         const SCORE_QUERY = `
         mutation postScore {
             postScore {
