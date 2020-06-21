@@ -35,19 +35,20 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
                 console.log('user40:', user);
                 const token = await auth0FromHook.getTokenSilently();
 
-                localStorage.setItem("type_app_userObj", JSON.stringify(user));//not storing key in local storage 6.19.20?
-                localStorage.setItem("type_app_userTok", JSON.stringify(token));//not storing key in local storage 6.19.20?
+                // localStorage.setItem("type_app_userObj", JSON.stringify(user));//not storing key in local storage 6.19.20?
+                // localStorage.setItem("type_app_userTok", JSON.stringify(token));//not storing key in local storage 6.19.20?
 
                 // check local storage before posting to db
-                const storedUser = JSON.parse(localStorage.getItem("type_app_userObj"));
-                console.log('storedUser: ', storedUser);
+                // const storedUser = JSON.parse(localStorage.getItem("type_app_userObj"));
+                // console.log('storedUser: ', storedUser);
 
-                if (storedUser && storedUser !== "undefined") {
-                    console.log('inside storedUser conditional')
+                // if (storedUser && storedUser !== "undefined") { buggy, what if diff users on same device?
+                    // console.log('inside storedUser conditional')
 
-                    setUser(storedUser);
+                    // setUser(storedUser);
 
-                    user = storedUser;
+                    // user = storedUser;
+                    if (false){
                 } else {
                     const USER_QUERY = `
                     mutation {

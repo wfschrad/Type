@@ -17,6 +17,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { useAuth0 } from "../../react-auth0-spa";
 
+import MenuButton from "./MenuButton";
+
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -93,10 +95,17 @@ export default function PrimarySearchAppBar() {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
-    const isLeftOpen = Boolean(anchorelleft);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const history = useHistory();
+
+    // const handleClick = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    //   };
+
+    //   const handleClose = () => {
+    //     setAnchorEl(null);
+    //   };
 
     const handleLeftOpen = (ev) => {
         setanchorelleft(ev.currentTarget);
@@ -123,14 +132,6 @@ export default function PrimarySearchAppBar() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
-    const handleLeftClick = (ev) => {
-        console.log('left click')
-    }
-
-    const handleAccountClick = (ev) => {
-        console.log('account click')
-    }
-
     const handleProfileClick = (ev) => {
         handleMenuClose(ev);
         history.push('/profile');
@@ -144,7 +145,6 @@ export default function PrimarySearchAppBar() {
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
-        <>
         <Menu
             anchorEl={anchorEl}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -157,21 +157,6 @@ export default function PrimarySearchAppBar() {
             <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
-                <Menu
-                anchorEl={anchorelleft}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                // id={menuId}
-                keepMounted
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={isLeftOpen}
-                onClose={handleLeftClose}
-            >
-
-                <MenuItem onClick={handleLeftClick}>Something</MenuItem>
-                <MenuItem onClick={handleAccountClick}>Accountt</MenuItem>
-            </Menu>
-            </>
-
     );
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -219,6 +204,8 @@ export default function PrimarySearchAppBar() {
         <div className={classes.grow}>
             <AppBar position="static">
                 <Toolbar>
+                    <MenuButton iconType={AccountCircle} items={['List1', 'List2']}/>
+                    <MenuButton iconType={MenuIcon} items={['List3', 'List4']}/>
                     <IconButton
                         edge="start"
                         className={classes.menuButton}

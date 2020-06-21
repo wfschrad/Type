@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
         height: "800px",
         width: "100%",
         alignItems: "center",
-        scrollable: "auto"
+        overflowY: "scroll"
     },
     control: {
         padding: theme.spacing(2),

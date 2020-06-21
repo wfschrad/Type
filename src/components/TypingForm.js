@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
 import gcl from 'graphql-tag';
 import { Query } from 'react-apollo';
 import FormControl from '@material-ui/core/FormControl';
@@ -16,6 +17,7 @@ export default function TypingForm({ values }) {
     const [answers, setAnswers] = useState(new Array(48).fill(null));
     const [questions, setQuestions] = useState([]);
     const { user } = useAuth0();
+    const history = useHistory();
 
 
     const useStyles = makeStyles((theme) => ({
@@ -89,7 +91,7 @@ export default function TypingForm({ values }) {
 
         //post to db
 
-        // history.push('/home')?
+        history.push('/profile');
     }
 
     const calculateForm = () => {
@@ -118,14 +120,14 @@ export default function TypingForm({ values }) {
         const SCORE_QUERY = `
         mutation onBoardUser{
             onBoardUser(
-                firstName: "${values.firstName}", 
-                email: "${user.email}", 
-                gender: "${values.gender}", 
-                age: ${values.age}, 
-                bio: "${values.bio}", 
-                rawEI: ${scores[0][1]}, 
-                rawNS: ${scores[1][1]}, 
-                rawFT: ${scores[2][1]}, 
+                firstName: "${values.firstName}",
+                email: "${user.email}",
+                gender: "${values.gender}",
+                age: ${values.age},
+                bio: "${values.bio}",
+                rawEI: ${scores[0][1]},
+                rawNS: ${scores[1][1]},
+                rawFT: ${scores[2][1]},
                 rawJP: ${scores[3][1]})
                 {
               firstName
@@ -135,7 +137,7 @@ export default function TypingForm({ values }) {
               rawNS
               rawFT
               rawJP
-                
+
             }
           }
         `;

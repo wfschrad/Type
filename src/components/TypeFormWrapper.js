@@ -26,6 +26,7 @@ export class TypeFormWrapper extends Component {
                     Choose the answer that best represents your personality most of the time.
                 </p>
                     <TypingForm
+                        continue={this.continue}
                         values={values}
                     />
                 </>

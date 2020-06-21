@@ -17,3 +17,4 @@
 
 1. Implement robust DM feature with sockets
 2. Increase filter parameters to include location and distance preferences
+3. Introduce basic algorithmic detection for spurious form responses

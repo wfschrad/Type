@@ -4,7 +4,8 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo'
 
 import NavBar from "./components/NavBar";
-import AppBar from "./components/material_blocks/AppBar"
+import AppBar from "./components/material_blocks/AppBar";
+import AppBar2 from "./components/material_blocks/AppBar2";
 import Profile from "./components/Profile";
 import history from "./utils/history";
 import PrivateRoute from "./components/PrivateRoute";
