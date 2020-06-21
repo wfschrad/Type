@@ -8,6 +8,7 @@ import Axios from 'axios';
 
 import Radio from './material_blocks/Radio';
 import Button from './material_blocks/Button';
+import Modal from '@material-ui/core/Modal';
 
 export default function TypingForm() {
     const [answers, setAnswers] = useState(new Array(48).fill(null));
@@ -20,7 +21,16 @@ export default function TypingForm() {
         button: {
             margin: theme.spacing(1, 1, 0, 0),
         },
+        paper: {
+            position: 'absolute',
+            width: 400,
+            backgroundColor: theme.palette.background.paper,
+            border: '2px solid #000',
+            boxShadow: theme.shadows[5],
+            padding: theme.spacing(2, 4, 3),
+        },
     }));
+
 
     const classes = useStyles();
 

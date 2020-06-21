@@ -21,6 +21,7 @@ import { useAuth0 } from "../../react-auth0-spa";
 const useStyles = makeStyles((theme) => ({
     grow: {
         flexGrow: 1,
+        MarginBottom: "10px"
     },
     menuButton: {
         marginRight: theme.spacing(2),

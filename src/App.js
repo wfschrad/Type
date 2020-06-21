@@ -14,6 +14,9 @@ import TypingForm from "./components/TypingForm";
 import Prospects from "./components/Prospects";
 import Splash from "./components/Splash";
 import Account from "./components/Account";
+import Modal from "./components/material_blocks/Modal";
+import Grid from "./components/material_blocks/Grid";
+import UserForm from "./components/UserForm";
 
 
 const client = new ApolloClient({
@@ -31,6 +34,9 @@ function App() {
           <Route path="/" exact component={Splash} />
           <Route path="/typingForm" exact component={TypingForm} />
           <Route path="/match" exact component={Prospects} />
+          <Route path="/modal" component={Modal}/>
+          <Route path="/grid" component={Grid}/>
+          <Route path="/userForm" component={UserForm}/>
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/account" component={Account} />
         </Switch>
