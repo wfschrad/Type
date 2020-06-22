@@ -43,12 +43,12 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
                 // console.log('storedUser: ', storedUser);
 
                 // if (storedUser && storedUser !== "undefined") { buggy, what if diff users on same device?
-                    // console.log('inside storedUser conditional')
+                // console.log('inside storedUser conditional')
 
-                    // setUser(storedUser);
+                // setUser(storedUser);
 
-                    // user = storedUser;
-                    if (false){
+                // user = storedUser;
+                if (false) {
                 } else {
                     const USER_QUERY = `
                     mutation {

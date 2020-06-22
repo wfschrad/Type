@@ -20,6 +20,11 @@ import Grid from "./components/material_blocks/Grid";
 import UserForm from "./components/UserForm";
 import Home from "./components/Home";
 import OnBoard from "./components/OnBoard";
+import ProfileUpload from "./components/ProfileUpload";
+import ProfileUpload2 from "./components/ProfileUpload2";
+import StyledUpload from "./components/StyledUpload";
+
+
 
 
 const client = new ApolloClient({
@@ -41,6 +46,7 @@ function App() {
           <Route path="/onboard" component={OnBoard} />
           <Route path="/userForm" component={UserForm} />
           <Route path="/home" component={Home} />
+          <Route path="/upload" component={StyledUpload} />
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/account" component={Account} />
         </Switch>
