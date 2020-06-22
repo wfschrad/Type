@@ -16,6 +16,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { useAuth0 } from "../../react-auth0-spa";
+import MenuButton from "../NavMenu";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -145,19 +146,19 @@ export default function PrimarySearchAppBar() {
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
         <>
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        </Menu>
-                <Menu
+            <Menu
+                anchorEl={anchorEl}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                id={menuId}
+                keepMounted
+                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                open={isMenuOpen}
+                onClose={handleMenuClose}
+            >
+                <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+            {/* <Menu
                 anchorEl={anchorelleft}
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 // id={menuId}
@@ -169,8 +170,8 @@ export default function PrimarySearchAppBar() {
 
                 <MenuItem onClick={handleLeftClick}>Something</MenuItem>
                 <MenuItem onClick={handleAccountClick}>Accountt</MenuItem>
-            </Menu>
-            </>
+            </Menu> */}
+        </>
 
     );
 
@@ -225,21 +226,22 @@ export default function PrimarySearchAppBar() {
                         color="inherit"
                         aria-label="open drawer"
                     >
-                        <MenuIcon>
-                        onClick={handleLeftOpen}
-                        </MenuIcon>
-                        </IconButton>
-                        <Menu
+                        {/* <MenuIcon>
+                            onClick={handleLeftClick}
+                        </MenuIcon> */}
+                        <MenuButton />
+                    </IconButton>
+                    <Menu
                         anchorEl={anchorEl}
                         keepMounted
                         open={Boolean(anchorEl)}
-                        // onClose={handleClose}
-                        >
-                            {/* <MenuItem onClick={handleClose}>Match</MenuItem>
+                    // onClose={handleClose}
+                    >
+                        {/* <MenuItem onClick={handleClose}>Match</MenuItem>
                             <MenuItem onClick={handleClose}>Messages</MenuItem>
                             <MenuItem onClick={handleClose}>My Account</MenuItem> */}
-                        </Menu>
-                        {/* </IconButton> */}
+                    </Menu>
+                    {/* </IconButton> */}
 
                     <Typography className={classes.title} variant="h6" noWrap>
                         Material-UI

@@ -6,6 +6,7 @@ import { ApolloProvider } from 'react-apollo'
 import NavBar from "./components/NavBar";
 import AppBar from "./components/material_blocks/AppBar";
 import AppBar2 from "./components/material_blocks/AppBar2";
+import AppBarFinal from "./components/AppBarFinal";
 import Profile from "./components/Profile";
 import history from "./utils/history";
 import PrivateRoute from "./components/PrivateRoute";
@@ -38,6 +39,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router history={history}>
         <header>
+          {/* <AppBarFinal /> */}
           <AppBar />
         </header>
         <Switch>

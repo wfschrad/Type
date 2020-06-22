@@ -72,7 +72,7 @@ export default function TypingForm({ values }) {
         })();
     }, []);
 
-    const handleFormSubmission = (ev) => {
+    const handleFormSubmission = async (ev) => {
         ev.preventDefault();
         console.log('form submission hit')
         console.log('answers after submission: ', answers)
@@ -87,10 +87,10 @@ export default function TypingForm({ values }) {
         }
 
         // calculate scores
-        calculateForm();
+        await calculateForm();
 
         //post to db
-
+        debugger;
         history.push('/profile');
     }
 
