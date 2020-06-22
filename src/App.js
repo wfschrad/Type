@@ -23,6 +23,8 @@ import OnBoard from "./components/OnBoard";
 import ProfileUpload from "./components/ProfileUpload";
 import ProfileUpload2 from "./components/ProfileUpload2";
 import StyledUpload from "./components/StyledUpload";
+import UploadFinal from "./components/PhotoUploadFinal";
+
 
 
 
@@ -46,7 +48,7 @@ function App() {
           <Route path="/onboard" component={OnBoard} />
           <Route path="/userForm" component={UserForm} />
           <Route path="/home" component={Home} />
-          <Route path="/upload" component={StyledUpload} />
+          <Route path="/upload" component={UploadFinal} />
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/account" component={Account} />
         </Switch>

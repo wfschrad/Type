@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import Axios from 'axios';
 
 const baseStyle = {
     flex: 1,
@@ -40,12 +41,37 @@ export default function StyledDropzone(props) {
         isDragReject
     } = useDropzone({ accept: ['image/jpeg', 'image/png'] });
 
+    const [uploadFile, setUploadFile] = useState('');
+
     const files = acceptedFiles.map(file => (
         <li key={file.path}>
             {file.path} - {file.size} bytes
         </li>
     ));
 
+    const handleFileChange = async (ev) => {
+        console.log('file change handler activated')
+        setUploadFile(ev.target.files[0]);
+        const uploadRes = await Axios({
+            url: 'http://localhost:8080/aws/image-upload',
+            method: 'post',
+            data: {
+                image: uploadFile
+            }
+        });
+        console.log('uploadRes: ', uploadRes);
+    }
+
+    const handleUpload = async (ev) => {
+        const uploadRes = await Axios({
+            url: 'http://localhost8080/aws/image-upload',
+            method: 'post',
+            data: {
+                image: uploadFile
+            }
+        });
+        console.log('uploadRes: ', uploadRes);
+    }
     const style = useMemo(() => ({
         ...baseStyle,
         ...(isDragActive ? activeStyle : {}),
@@ -60,8 +86,9 @@ export default function StyledDropzone(props) {
     return (
         <div className="container">
             <div {...getRootProps({ style })}>
-                <input {...getInputProps()} />
+                <input {...getInputProps()} onChange={handleFileChange} />
                 <p>Drag 'n' drop some files here, or click to select files</p>
+                <button onClick={handleUpload}>Confirm Upload</button>
             </div>
             <aside>
                 <h4>Files</h4>
