@@ -69,9 +69,9 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
                         },
                     });
                     console.log('res data: ', res.data.data);
-                    if (res.data.data.adduser) {
-                        const id = res.data.data.addUser.id;
-                        user.id = id;
+                    if (res.data.data.addUser) {
+                        user.id = res.data.data.addUser.id;
+                        console.log('user after: ', user)
                         localStorage.setItem("type_app_userObj", JSON.stringify(user));//not storing key in local storage 6.19.20?
                         localStorage.setItem("type_app_userTok", JSON.stringify(token));//not storing key in local storage 6.19.20?
                     }

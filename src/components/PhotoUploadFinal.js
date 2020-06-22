@@ -8,6 +8,7 @@ import { useAuth0 } from "../react-auth0-spa";
 import { api } from "../config"
 import Axios from "axios";
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
@@ -26,6 +27,8 @@ export default function ProfileUpload() {
     const [fileNames, setFileNames] = useState([]);
     const [imageUrls, setImageUrls] = useState([]);
     const [uploadFile, setUploadFile] = useState('');
+
+    const { user } = useAuth0();
 
     //grab ref to image form data
     const imageData = useRef(new FormData());
@@ -61,7 +64,7 @@ export default function ProfileUpload() {
         debugger;
 
         const uploadRes = await Axios({
-            url: 'http://localhost:8080/aws/image-upload',
+            url: `http://localhost:8080/aws/image-upload/${user.id}`,
             method: 'post',
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -104,7 +107,6 @@ export default function ProfileUpload() {
                                     >
                                         <input {...getInputProps()} />
                                         <div className="dropzone-text">
-                                            <span>{isDragActive ? "😀" : "🙃"}</span>
                                             <p >Drag/drop image, or click to select image</p>
                                         </div>
                                         <div style={{ paddingLeft: "10px" }}>
