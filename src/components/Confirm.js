@@ -17,15 +17,15 @@ export class Confirm extends Component {
     }
 
     render() {
-        const { values: { firstName, gender, age, bio }} = this.props;
+        const { values: { prefName, gender, age, bio }} = this.props;
         return (
             <MuiThemeProvider>
                 <>
                 <AppBar title="Confirm Details"/>
                 <List>
                     <ListItem
-                    primaryText="First Name"
-                    secondaryText={firstName}
+                    primaryText="Preferred Name"
+                    secondaryText={prefName}
                     />
                     <ListItem
                     primaryText="Age"

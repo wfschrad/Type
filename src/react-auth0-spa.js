@@ -55,9 +55,11 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
                     addUser(firstName: "${user.nickname}", email: "${user.email}", auth0Id: "${user.sub}", profilePhoto: "${user.picture}"){
                         id
                         profilePhoto
+                        uploadedPhoto
                     }
                 }`;
                     console.log('user query: ', USER_QUERY)
+                    console.log('base url: ', apiBaseUrl)
 
                     console.log('posting user to db');
                     const res = await Axios({
@@ -71,9 +73,10 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
                         },
                     });
                     console.log('res data: ', res.data.data);
-                    if (res.data.data.addUser) {
-                        user.id = res.data.data.addUser.id;
-                        user.picture = res.data.data.addUser.profilePhoto;
+                    const addUser = res.data.data.addUser;
+                    if (addUser) {
+                        user.id = addUser.id;
+                        user.picture = addUser.uploadedPhoto ? addUser.uploadedPhoto : addUser.profilePhoto;
                         console.log('user after: ', user)
                         localStorage.setItem("type_app_userObj", JSON.stringify(user));//not storing key in local storage 6.19.20?
                         localStorage.setItem("type_app_userTok", JSON.stringify(token));//not storing key in local storage 6.19.20?

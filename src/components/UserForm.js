@@ -9,7 +9,7 @@ import Success from './Success';
 export class UserForm extends Component {
     state = {
         step: 1,
-        firstName: '',
+        prefName: '',
         age: '',
         gender: '',
         // interestedIn: '', add 'interested in' and 'age range' logic in next phase
@@ -39,8 +39,8 @@ export class UserForm extends Component {
     }
 
     render() {
-        const { step, firstName, age, gender, bio } = this.state;
-        const values = { firstName, age, gender, bio };
+        const { step, prefName, age, gender, bio } = this.state;
+        const values = { prefName, age, gender, bio };
 
         switch(step) {
             case 1:
