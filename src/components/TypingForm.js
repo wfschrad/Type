@@ -90,7 +90,6 @@ export default function TypingForm({ values }) {
         await calculateForm();
 
         //post to db
-        debugger;
         history.push('/profile');
     }
 

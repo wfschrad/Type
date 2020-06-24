@@ -60,7 +60,6 @@ export default function ProfileUpload() {
         }
 
         const token = await getTokenSilently();
-        debugger;
 
         const uploadRes = await Axios({
             url: `http://localhost:8080/aws/image-upload/${user.id}`,
