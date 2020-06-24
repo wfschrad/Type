@@ -5,6 +5,7 @@ import io from 'socket.io-client';
 import { USER_CONNECTED, LOGOUT } from './events.js';
 
 import SocketLoginForm from './SocketLoginForm';
+import ChatContainer from './chats/ChatContainer';
 
 const socketUrl = 'http://localhost:8081';
 
@@ -41,11 +42,14 @@ export default class Layout extends Component {
 
     render() {
         const { title } = this.props;
-        const { socket } = this.state;
+        const { socket, user } = this.state;
         return (
             <div className='socket__container'>
-                {title}
-                <SocketLoginForm socket={socket} setUser={this.setUser}/>
+                {
+                    !user
+                        ? <SocketLoginForm socket={socket} setUser={this.setUser}/>
+                        : <ChatContainer socket={socket} user={user} logout={this.logout}/>
+                }
             </div>
         )
     }
