@@ -25,6 +25,7 @@ import ProfileUpload from "./components/ProfileUpload";
 import ProfileUpload2 from "./components/ProfileUpload2";
 import StyledUpload from "./components/StyledUpload";
 import UploadFinal from "./components/PhotoUploadFinal";
+import SocketLayout from "./components/socket/Layout";
 
 
 
@@ -44,6 +45,7 @@ function App() {
         </header>
         <Switch>
           <Route path="/" exact component={Splash} />
+  <Route path="/socket" exact render={(props) => <SocketLayout {...props} title='Socket Bossin'/>}/>
           <Route path="/typingForm" exact component={TypingForm} />
           <Route path="/match" exact component={Prospects} />
           <Route path="/modal" component={Modal} />
