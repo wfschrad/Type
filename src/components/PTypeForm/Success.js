@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Axios from 'axios';
-import { apiBaseUrl } from "../config";
+import { apiBaseUrl } from "../../config";
 
 
 

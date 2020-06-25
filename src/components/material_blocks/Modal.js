@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 
-import TypingForm from '../TypingForm';
+import TypingForm from '../PTypeForm/TypingForm';
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;

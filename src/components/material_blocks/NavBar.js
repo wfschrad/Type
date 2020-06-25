@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuth0 } from "../react-auth0-spa";
+import { useAuth0 } from "../../react-auth0-spa";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {

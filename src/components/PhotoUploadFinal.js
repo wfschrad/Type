@@ -6,19 +6,34 @@ import Dropzone from "react-dropzone";
 import Paper from '@material-ui/core/Paper';
 import { useAuth0 } from "../react-auth0-spa";
 import Axios from "axios";
+import { useHistory, Redirect } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
+
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
-            margin: theme.spacing(1),
-            minWidth: 400,
-            width: '60vw',
+            marginTop: 30,
+            // minWidth: 400,
+            // width: '60vw',
             background: '#FAF5FB'
         },
     },
     form: {
-        width: '60vw'
+        width: '60vw',
+        height: 600
+    },
+    preview: {
+        height: 400,
+        width: 400
+    },
+    dropzone: {
+        width: 600,
+        marginLeft: 20
+    },
+    leftEdge: {
+        marginLeft: 30
     }
 }));
 
@@ -28,6 +43,7 @@ export default function ProfileUpload() {
     const [uploadFile, setUploadFile] = useState('');
 
     const { user } = useAuth0();
+    const history = useHistory();
 
     //grab ref to image form data
     const imageData = useRef(new FormData());
@@ -72,62 +88,65 @@ export default function ProfileUpload() {
         });
         console.log('uploadRes: ', uploadRes);
 
-        // if (upLoadRes.ok) {
-        //     window.location.href = '/'
-        // }
+
+            history.push('/profile');
+
 
     }
 
     return (
-        <div id="new-post-form-container" onSubmit={handlePostSubmit} >
-            < Paper >
-                <form className={`${classes.root} new-post-form`} autoComplete="off">
-                    {/* dropzone component comes from react-dropzone
-                and allows client to drag/drop or upload an image to post */}
-                    <Paper className="drop-zone" color="secondary" className="MuiFormControl-root">
-                        <Dropzone onDrop={handleDrop} accept="image/*" >
-                            {({ getRootProps,
-                                getInputProps,
-                                isDragActive,
-                                isDragAccept,
-                                isDragReject
-                            }) => {
-                                const additionalClass = isDragAccept
-                                    ? "accept"
-                                    : isDragReject
-                                        ? "reject"
-                                        : "";
-                                return (
-                                    <div
-                                        {...getRootProps({
-                                            className: `dropzone ${additionalClass} dropzone-container`
-                                        })}
-                                    >
-                                        <input {...getInputProps()} />
-                                        <div className="dropzone-text">
-                                            <p >Drag/drop image, or click to select image</p>
-                                        </div>
-                                        <div style={{ paddingLeft: "10px" }}>
-                                            File: {fileNames.map(fileName => (
-                                            <li key={fileName}>{fileName}</li>
-                                        ))}
+        <Grid container className={classes.gridContainer}>
+            <Grid className={classes.leftEdge} item m={1}></Grid>
+            <Grid item m={10}>
+                <div className={classes.uploadWrapper} onSubmit={handlePostSubmit}>
+                    <form className={classes.root} autoComplete="off">
+                    <Dropzone className={classes.dropzone} onDrop={handleDrop} accept="image/*" >
+                             {({ getRootProps,
+                                 getInputProps,
+                                 isDragActive,
+                                 isDragAccept,
+                                 isDragReject
+                             }) => {
+                                 const additionalClass = isDragAccept
+                                     ? "accept"
+                                     : isDragReject
+                                         ? "reject"
+                                         : "";
+                                 return (
+                                     <div
+                                         {...getRootProps({
+                                             className: `dropzone ${additionalClass} dropzone-container`
+                                         })}
+                                     >
+                                         <input {...getInputProps()} />
+                                         <div className="dropzone-text">
+                                             <p >Drag/drop image, or click to select image</p>
+                                         </div>
+                                         {/* {/* <div style={{ paddingLeft: "10px" }}> */}
+                                             {/* File: {fileNames.map(fileName => (
+                                             <li key={fileName}>{fileName}</li>
+                                         ))} */}
 
-                                            <div>Preview:</div>
-                                            {imageUrls.map(imageUrl => (
-                                                <img alt={'uploadedImage'} key={imageUrl} src={imageUrl} width="100%" />
-                                            ))}
-                                        </div>
-                                    </div>
-                                )
-                            }
-                            }
-                        </Dropzone>
-                    </Paper>
-                    <Button type="submit" variant="contained">
-                        Post
-                    </Button>
-                </form>
-            </Paper >
-        </div >
-    );
+                                             <div >Preview:</div>
+                                             {imageUrls.map(imageUrl => (
+                                                 <img className={classes.preview} alt={'uploadedImage'} key={imageUrl} src={imageUrl}  />
+                                             ))}
+                                         </div>
+
+                                 )
+                             }
+                             }
+                         </Dropzone>
+                     {/* </Paper> */}
+                     <Button type="submit" variant="contained">
+                         Post
+                     </Button>
+
+
+                    </form>
+                </div>
+            </Grid>
+            <Grid item m={1}></Grid>
+        </Grid>
+    )
 }

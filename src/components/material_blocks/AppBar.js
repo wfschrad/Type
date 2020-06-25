@@ -16,7 +16,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { useAuth0 } from "../../react-auth0-spa";
-import MenuButton from "../NavMenu";
+import MenuButton from "./NavMenu";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,30 +32,6 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             display: 'block',
         },
-    },
-    search: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
-        '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.25),
-        },
-        marginRight: theme.spacing(2),
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(3),
-            width: 'auto',
-        },
-    },
-    searchIcon: {
-        padding: theme.spacing(0, 2),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     inputRoot: {
         color: 'inherit',
@@ -158,19 +134,6 @@ export default function PrimarySearchAppBar() {
                 <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
-            {/* <Menu
-                anchorEl={anchorelleft}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                // id={menuId}
-                keepMounted
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={isLeftOpen}
-                onClose={handleLeftClose}
-            >
-
-                <MenuItem onClick={handleLeftClick}>Something</MenuItem>
-                <MenuItem onClick={handleAccountClick}>Accountt</MenuItem>
-            </Menu> */}
         </>
 
     );
@@ -188,17 +151,17 @@ export default function PrimarySearchAppBar() {
         >
             <MenuItem>
                 <IconButton aria-label="show 4 new mails" color="inherit">
-                    <Badge badgeContent={4} color="secondary">
+                    {/* <Badge badgeContent={4} color="secondary"> */}
                         <MailIcon />
-                    </Badge>
+                    {/* </Badge> */}
                 </IconButton>
                 <p>Messages</p>
             </MenuItem>
             <MenuItem>
                 <IconButton aria-label="show 11 new notifications" color="inherit">
-                    <Badge badgeContent={11} color="secondary">
+                    {/* <Badge badgeContent={11} color="secondary"> */}
                         <NotificationsIcon />
-                    </Badge>
+                    {/* </Badge> */}
                 </IconButton>
                 <p>Notifications</p>
             </MenuItem>
@@ -244,7 +207,7 @@ export default function PrimarySearchAppBar() {
                     {/* </IconButton> */}
 
                     <Typography className={classes.title} variant="h6" noWrap>
-                        Material-UI
+                        Type
           </Typography>
                     {/* <div className={classes.search}>
                         <div className={classes.searchIcon}>
@@ -262,14 +225,14 @@ export default function PrimarySearchAppBar() {
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                         <IconButton aria-label="show 4 new mails" color="inherit">
-                            <Badge badgeContent={4} color="secondary">
+                            {/* <Badge badgeContent={4} color="secondary"> */}
                                 <MailIcon />
-                            </Badge>
+                            {/* </Badge> */}
                         </IconButton>
                         <IconButton aria-label="show 17 new notifications" color="inherit">
-                            <Badge badgeContent={17} color="secondary">
+                            {/* <Badge badgeContent={17} color="secondary"> */}
                                 <NotificationsIcon />
-                            </Badge>
+                            {/* </Badge> */}
                         </IconButton>
                         <IconButton
                             edge="end"

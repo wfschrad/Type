@@ -5,13 +5,13 @@ import { Query } from 'react-apollo';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
-import { useAuth0 } from "../react-auth0-spa";
+import { useAuth0 } from "../../react-auth0-spa";
 import { useAlert } from 'react-alert'
 
 
 
-import Radio from './material_blocks/Radio';
-import Button from './material_blocks/Button';
+import Radio from '../material_blocks/Radio';
+import Button from '../material_blocks/Button';
 import Modal from '@material-ui/core/Modal';
 
 export default function TypingForm({ values, continueFunc }) {

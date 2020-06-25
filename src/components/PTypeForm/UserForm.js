@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-import BasicInfoForm from './BasicInfoForm';
+import BasicInfoForm from '../BasicInfoForm';
 import TypeFormWrapper from './TypeFormWrapper';
 import TypingForm from './TypingForm';
-import Confirm from './Confirm';
+import Confirm from '../Confirm';
 import Success from './Success';
 import { withAlert } from 'react-alert'
 
