@@ -2,6 +2,9 @@ import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo'
+import AlertTemplate from 'react-alert-template-basic'
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+
 
 import NavBar from "./components/NavBar";
 import AppBar from "./components/material_blocks/AppBar";
@@ -26,6 +29,8 @@ import ProfileUpload2 from "./components/ProfileUpload2";
 import StyledUpload from "./components/StyledUpload";
 import UploadFinal from "./components/PhotoUploadFinal";
 import SocketLayout from "./components/socket/Layout";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import Success from './components/Success';
 
 
 
@@ -38,6 +43,8 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+        <AlertProvider template={AlertTemplate} position={'middle'} >
+
       <Router history={history}>
         <header>
           {/* <AppBarFinal /> */}
@@ -45,18 +52,21 @@ function App() {
         </header>
         <Switch>
           <Route path="/" exact component={Splash} />
-  <Route path="/socket" exact render={(props) => <SocketLayout {...props} title='Socket Bossin'/>}/>
+          <Route path="/socket" exact render={(props) => <SocketLayout {...props} title='Socket Bossin'/>}/>
           <Route path="/typingForm" exact component={TypingForm} />
-          <Route path="/match" exact component={Prospects} />
+          <ProtectedRoute path="/match" exact component={Prospects} />
           <Route path="/modal" component={Modal} />
           <Route path="/onboard" component={OnBoard} />
           <Route path="/userForm" component={UserForm} />
+          <Route exact path="/success" component={Success}/>
           <Route path="/home" component={Home} />
           <Route path="/upload" component={UploadFinal} />
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/account" component={Account} />
         </Switch>
       </Router>
+      </AlertProvider>
+
     </ApolloProvider>
   );
 }

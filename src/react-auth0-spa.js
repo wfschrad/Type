@@ -56,6 +56,7 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
                         id
                         profilePhoto
                         uploadedPhoto
+                        isMatchable
                     }
                 }`;
                     console.log('user query: ', USER_QUERY)
@@ -77,6 +78,7 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
                     if (addUser) {
                         user.id = addUser.id;
                         user.picture = addUser.uploadedPhoto ? addUser.uploadedPhoto : addUser.profilePhoto;
+                        user.isMatchable = addUser.isMatchable;
                         console.log('user after: ', user)
                         localStorage.setItem("type_app_userObj", JSON.stringify(user));//not storing key in local storage 6.19.20?
                         localStorage.setItem("type_app_userTok", JSON.stringify(token));//not storing key in local storage 6.19.20?
