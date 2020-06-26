@@ -14,15 +14,21 @@
     "axios": "^0.19.2",
     "graphql": "^15.1.0",
     "graphql-tag": "^2.10.3",
+    "lodash": "^4.17.15",
     "material-ui": "^0.20.2",
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
     "react": "^16.13.1",
+    "react-alert": "^7.0.1",
+    "react-alert-template-basic": "^1.0.0",
+    "react-alert-template-mui": "^1.0.4",
     "react-apollo": "^3.1.5",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.1",
+    "react-icons": "^3.10.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "socket.io-client": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

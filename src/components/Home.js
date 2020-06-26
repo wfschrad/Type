@@ -6,7 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import Paper from '@material-ui/core/Paper';
-import UserForm from './UserForm';
+import UserForm from './PTypeForm/UserForm';
 
 const useStyles = makeStyles((theme) => ({
   root: {

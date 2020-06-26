@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import gcl from 'graphql-tag';
 import { Query } from 'react-apollo';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
-import { useAuth0 } from "../react-auth0-spa";
+import { useAuth0 } from "../../react-auth0-spa";
+import { useAlert } from 'react-alert'
 
 
 
-import Radio from './material_blocks/Radio';
-import Button from './material_blocks/Button';
+import Radio from '../material_blocks/Radio';
+import Button from '../material_blocks/Button';
 import Modal from '@material-ui/core/Modal';
 
-export default function TypingForm({ values }) {
+export default function TypingForm({ values, continueFunc }) {
     const [answers, setAnswers] = useState(new Array(48).fill(null));
     const [questions, setQuestions] = useState([]);
     const { user } = useAuth0();
     const history = useHistory();
+    const alert = useAlert();
 
 
     const useStyles = makeStyles((theme) => ({
@@ -34,6 +36,16 @@ export default function TypingForm({ values }) {
             border: '2px solid #000',
             boxShadow: theme.shadows[5],
             padding: theme.spacing(2, 4, 3),
+        },
+        formHeading: {
+            backgroundColor: 'rgb(0, 188, 212)',
+            height: 30,
+            color: 'white',
+            fontSize: 36,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 20
         },
     }));
 
@@ -84,14 +96,16 @@ export default function TypingForm({ values }) {
         } else {
             console.log('form submission: false')
             // set helper text
+            alert.show(<div style={{ color: 'white'}}>Please answer all questions before submitting.</div>)
+            return;
         }
 
         // calculate scores
         await calculateForm();
 
         //post to db
-        debugger;
-        history.push('/profile');
+         history.push('/success');
+        // return <Redirect to='/success'/>
     }
 
     const calculateForm = () => {
@@ -120,8 +134,8 @@ export default function TypingForm({ values }) {
         const SCORE_QUERY = `
         mutation onBoardUser{
             onBoardUser(
-                firstName: "${values.firstName}",
-                email: "${user.email}",
+                id: ${user.id}
+                preferredName: "${values.prefName}",
                 gender: "${values.gender}",
                 age: ${values.age},
                 bio: "${values.bio}",
@@ -130,7 +144,7 @@ export default function TypingForm({ values }) {
                 rawFT: ${scores[2][1]},
                 rawJP: ${scores[3][1]})
                 {
-              firstName
+              preferredName
               id
               pTypeId
               rawEI
