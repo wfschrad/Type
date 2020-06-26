@@ -20,7 +20,7 @@ export default function MatchArena() {
 
         const PROSPECT_QUERY = `
             {
-                prospects(userPTypeId:1, relThresh:2, userId:1){
+                prospects(userId:1, userPTypeId:13, relThresh:2){
                     id
                     PType{
                         name
@@ -31,7 +31,7 @@ export default function MatchArena() {
                 }
             }
         `;
-        console.log('match query')
+        console.log('match query');
             //fetch prospects from db
 
             (async () => {
@@ -47,7 +47,7 @@ export default function MatchArena() {
                 });
                 console.log('prospectRes.data.data: ', prospectRes.data.data);
                 setProspects(prospectRes.data.data.prospects)
-
+                debugger;
             })();
 
         //set new prospects array in state
@@ -61,7 +61,7 @@ export default function MatchArena() {
             {prospects && prospects.map(prospect => (
                 <div
                     key={prospect.id}>
-                    {prospect.preferredName}
+                    {`prospectId: ${prospect.id}; prefName: ${prospect.preferredName}`}
                 </div>
 
             ))}
