@@ -1,8 +1,9 @@
 //This component will house the matching ux
 
 import React, { useState, useEffect } from 'react'
+import Axios from 'axios';
 
-import { apiBaseUrl } from "./config";
+import { apiBaseUrl } from "../config";
 
 export default function MatchArena() {
     const [matchThreshold, setMatchThreshold] = useState(2);//default to 'average match'
@@ -11,39 +12,59 @@ export default function MatchArena() {
         setMatchThreshold(ev.target.value);
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         //fetch potential matches
+        console.log('in use effect')
 
         //make query string
 
-        PROSPECT_QUERY = `
-        `;
-
-        //fetch prospects from db
-
-        (async()=> {
-            const prospectRes = await Axios({
-                url: apiBaseUrl,
-                method: 'post',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                data: {
-                    query: PROSPECT_QUERY
+        const PROSPECT_QUERY = `
+            {
+                prospects(userPTypeId:1, relThresh:2, userId:1){
+                    id
+                    PType{
+                        name
+                        description
+                    }
+                    preferredName
+                    bio
                 }
-            });
-            console.log('prospectRes: ', prospectRes);
-        })();
+            }
+        `;
+        console.log('match query')
+            //fetch prospects from db
+
+            (async () => {
+                const prospectRes = await Axios({
+                    url: apiBaseUrl,
+                    method: 'post',
+                    // headers: {
+                    //     Authorization: `Bearer ${token}`,
+                    // },
+                    data: {
+                        query: PROSPECT_QUERY
+                    }
+                });
+                console.log('prospectRes.data.data: ', prospectRes.data.data);
+                setProspects(prospectRes.data.data.prospects)
+
+            })();
 
         //set new prospects array in state
-    })
+    }, []);
 
     return (
         //render material img cards of prospects
         //allow button selection (possibly add swipe functionality)
         //cards will need action listeners to persist user selection in db
         <div>
+            {prospects && prospects.map(prospect => (
+                <div
+                    key={prospect.id}>
+                    {prospect.preferredName}
+                </div>
 
+            ))}
         </div>
     )
 }

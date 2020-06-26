@@ -96,7 +96,7 @@ export default function TypingForm({ values, continueFunc }) {
         } else {
             console.log('form submission: false')
             // set helper text
-            alert.show(<div style={{ color: 'white'}}>Please answer all questions before submitting.</div>)
+            alert.show(<div style={{ color: 'white' }}>Please answer all questions before submitting.</div>)
             return;
         }
 
@@ -104,7 +104,7 @@ export default function TypingForm({ values, continueFunc }) {
         await calculateForm();
 
         //post to db
-         history.push('/success');
+        history.push('/success');
         // return <Redirect to='/success'/>
     }
 
@@ -134,7 +134,7 @@ export default function TypingForm({ values, continueFunc }) {
         const SCORE_QUERY = `
         mutation onBoardUser{
             onBoardUser(
-                id: ${user.id}
+                userId: ${user.id}
                 preferredName: "${values.prefName}",
                 gender: "${values.gender}",
                 age: ${values.age},

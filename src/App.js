@@ -20,6 +20,7 @@ import UploadFinal from "./components/PhotoUploadFinal";
 import SocketLayout from "./components/socket/Layout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Success from './components/PTypeForm/Success';
+import MatchArena from './components/MatchArena';
 
 
 
@@ -32,30 +33,30 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-        <AlertProvider template={AlertTemplate} position={'middle'} >
+      <AlertProvider template={AlertTemplate} position={'middle'} >
 
-      <Router history={history}>
-        <header>
-          {/* <AppBarFinal /> */}
-          <AppBar />
-        </header>
-        <Switch>
-          <Route path="/" exact component={Splash} />
-          <Route path="/socket" exact render={(props) => <SocketLayout {...props} title='Socket Bossin'/>}/>
-          <ProtectedRoute path="/match" exact component={Prospects} />
-          <Route path="/modal" component={Modal} />
-          <Route path="/onboard" component={OnBoard} />
-          <Route exact path="/success" component={Success}/>
-          <Route path="/home" component={Home} />
-          <Route path="/upload" component={UploadFinal} />
-          <Route
-                exact
-                path="/profile/:userId"
-                render={(props) => <Profile {...props} />}
-              />
-          <PrivateRoute path="/account" component={Account} />
-        </Switch>
-      </Router>
+        <Router history={history}>
+          <header>
+            {/* <AppBarFinal /> */}
+            <AppBar />
+          </header>
+          <Switch>
+            <Route path="/" exact component={Splash} />
+            <Route path="/socket" exact render={(props) => <SocketLayout {...props} title='Socket Bossin' />} />
+            <ProtectedRoute path="/match" exact component={MatchArena} />
+            <Route path="/modal" component={Modal} />
+            <Route path="/onboard" component={OnBoard} />
+            <Route exact path="/success" component={Success} />
+            <Route path="/home" component={Home} />
+            <Route path="/upload" component={UploadFinal} />
+            <Route
+              exact
+              path="/profile/:userId"
+              render={(props) => <Profile {...props} />}
+            />
+            <PrivateRoute path="/account" component={Account} />
+          </Switch>
+        </Router>
       </AlertProvider>
 
     </ApolloProvider>
