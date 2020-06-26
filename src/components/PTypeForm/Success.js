@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -47,20 +47,26 @@ class Success extends Component {
     continue = ev => {
         ev.preventDefault();
         //Process form, post user
-       return <Redirect to='/profile'/>;
+        const { history } = this.props;
+        debugger;
+        history.push(`/profile/${this.state.user.id}`);
+    //    return <Redirect to='/profile'/>;
 
     }
 
     checkMatches = ev => {
         ev.preventDefault();
-        return <Redirect to='/match'/>;
+        const { history } = this.props;
+        history.push('/match');
+        // return <Redirect to='/match'/>;
     }
 
     componentDidMount() {
         //fetch pType data
         const RESULTS_QUERY = `
         {
-            user(email: "${this.state.user.email}"){
+            user(userId: ${parseInt(this.state.user.id)}){
+                id
                 PType {
                     name
                     description
@@ -132,4 +138,4 @@ const styles = {
     }
 }
 
-export default withStyles(useStyles)(Success);
+export default withStyles(useStyles)(withRouter(Success));

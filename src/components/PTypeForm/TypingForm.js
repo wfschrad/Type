@@ -134,8 +134,8 @@ export default function TypingForm({ values, continueFunc }) {
         const SCORE_QUERY = `
         mutation onBoardUser{
             onBoardUser(
+                id: ${user.id}
                 preferredName: "${values.prefName}",
-                email: "${user.email}",
                 gender: "${values.gender}",
                 age: ${values.age},
                 bio: "${values.bio}",

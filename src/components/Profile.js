@@ -7,7 +7,7 @@ import Axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
-    bioContainer: {
+    contentBox: {
         height: 360,
         width: 360,
         display: 'flex',
@@ -41,6 +41,7 @@ const Profile = ({ match: { params: { userId }}}) => {
                 {
                     user(userId: ${userId}) {
                         uploadedPhoto
+                        preferredName
                         PType {
                             name
                             description
@@ -77,7 +78,11 @@ const Profile = ({ match: { params: { userId }}}) => {
                     <Grid item xs={5} >
                         <img src={typeUser.uploadedPhoto} alt="Profile" width="360" height="360" />
                     </Grid>
-                    <Grid item xs={7}></Grid>
+                    <Grid className={classes.contentBox} item xs={7}>
+                        <div>{typeUser.PType.name}</div>
+                        <div>{typeUser.PType.description}</div>
+
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
