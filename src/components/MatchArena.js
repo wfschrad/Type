@@ -2,12 +2,45 @@
 
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { apiBaseUrl } from "../config";
+
+import { apiBaseUrl } from '../config';
+import ProspectCard from './material_blocks/ComplexInteractionCard';
+
+const useStyles = makeStyles((theme) => ({
+    contentBox: {
+        height: 360,
+        width: 360,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end'
+    },
+    mainContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 60,
+    },
+    picGrid: {
+        marginLeft: 140
+    },
+    prospectRow: {
+        marginBotton: 30
+    }
+}))
+
 
 export default function MatchArena() {
     const [matchThreshold, setMatchThreshold] = useState(2);//default to 'average match'
     const [prospects, setProspects] = useState([]);
+    const [activeProspect, setActiveProspect] = useState(null);
+    const classes = useStyles();
+
+
+
     const handleThresholdChange = (ev) => {
         setMatchThreshold(ev.target.value);
     }
@@ -28,6 +61,8 @@ export default function MatchArena() {
                     }
                     preferredName
                     bio
+                    uploadedPhoto
+                    profilePhoto
                 }
             }
         `;
@@ -46,8 +81,12 @@ export default function MatchArena() {
                     }
                 });
                 console.log('prospectRes.data.data: ', prospectRes.data.data);
-                setProspects(prospectRes.data.data.prospects)
-                debugger;
+                const fetchedProspects = prospectRes.data.data.prospects;
+                if (fetchedProspects && fetchedProspects.length > 0) {
+                    setActiveProspect(fetchedProspects[0]);
+                    setProspects(fetchedProspects.slice(1));
+                    debugger;
+                }
             })();
 
         //set new prospects array in state
@@ -57,14 +96,30 @@ export default function MatchArena() {
         //render material img cards of prospects
         //allow button selection (possibly add swipe functionality)
         //cards will need action listeners to persist user selection in db
-        <div>
-            {prospects && prospects.map(prospect => (
+        <> {activeProspect &&
+            <Grid container className={classes.mainContainer} spacing={2}>
+                <Grid container className={classes.prospectRow} spacing={2}>
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={8}>
+                        <ProspectCard
+                        name={activeProspect.preferredName}
+                        typeName={activeProspect.PType.name}
+                        bio={activeProspect.bio}
+                        upload={activeProspect.uploadedPhoto}
+                        defaultPic={activeProspect.profilePhoto}
+                        />
+                    </Grid>
+                    <Grid item xs={2}></Grid>
+                </Grid>
+            </Grid>
+}
+            {/* {prospects && prospects.map(prospect => (
                 <div
                     key={prospect.id}>
                     {`prospectId: ${prospect.id}; prefName: ${prospect.preferredName}`}
                 </div>
 
-            ))}
-        </div>
+            ))} */}
+        </>
     )
 }
