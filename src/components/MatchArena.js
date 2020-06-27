@@ -8,6 +8,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { apiBaseUrl } from '../config';
 import ProspectCard from './material_blocks/ComplexInteractionCard';
+// import ThreshForm from './ThreshFormBody';
+import ThreshForm from './VerticalThresh';
+
+import Paper from './material_blocks/Paper';
 
 const useStyles = makeStyles((theme) => ({
     contentBox: {
@@ -29,6 +33,16 @@ const useStyles = makeStyles((theme) => ({
     },
     prospectRow: {
         marginBotton: 30
+    },
+    threshForm: {
+        display: 'flex',
+        width: '100%',
+        height: 600,
+        justifyContent: 'center',
+        marginLeft: 400
+    },
+    formPaper: {
+        width: '100%'
     }
 }))
 
@@ -41,9 +55,7 @@ export default function MatchArena() {
 
 
 
-    const handleThresholdChange = (ev) => {
-        setMatchThreshold(ev.target.value);
-    }
+
 
     useEffect(() => {
         //fetch potential matches
@@ -85,12 +97,12 @@ export default function MatchArena() {
                 if (fetchedProspects && fetchedProspects.length > 0) {
                     setActiveProspect(fetchedProspects[0]);
                     setProspects(fetchedProspects.slice(1));
-                    debugger;
                 }
             })();
 
         //set new prospects array in state
-    }, []);
+        console.log('matchThreshold: ', matchThreshold)
+    }, [matchThreshold]);
 
     return (
         //render material img cards of prospects
@@ -100,7 +112,7 @@ export default function MatchArena() {
             <Grid container className={classes.mainContainer} spacing={2}>
                 <Grid container className={classes.prospectRow} spacing={2}>
                     <Grid item xs={2}></Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={4}>
                         <ProspectCard
                         name={activeProspect.preferredName}
                         typeName={activeProspect.PType.name}
@@ -109,7 +121,22 @@ export default function MatchArena() {
                         defaultPic={activeProspect.profilePhoto}
                         />
                     </Grid>
+                    <Grid item xs={4}>
+                        <ThreshForm
+                        setMatchThreshold={setMatchThreshold}/>
+                    </Grid>
                     <Grid item xs={2}></Grid>
+                </Grid>
+                <Grid container className={classes.formWrapper} spacing={2}>
+                <Grid item xs={2}></Grid>
+                <Grid item xs={8}>
+                </Grid>
+                <Grid item xs={2}></Grid>
+
+                    {/* <div className={classes.threshForm} spacing={2}> */}
+                        {/* Radios here */}
+
+                    {/* </div> */}
                 </Grid>
             </Grid>
 }
