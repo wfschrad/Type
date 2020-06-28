@@ -89,7 +89,7 @@ export default function ProfileUpload() {
         console.log('uploadRes: ', uploadRes);
 
 
-            history.push('/profile');
+            history.push(`/profile/${user.id}`);
 
 
     }

@@ -15,11 +15,13 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        margin: '15 30 0 0'
     },
     formHeading: {
         fontWeight: 600,
-        marginTop: 30
+        marginTop: 30,
+        marginRight: 30
     }
 }))
 

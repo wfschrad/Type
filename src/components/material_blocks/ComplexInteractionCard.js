@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function RecipeReviewCard({ name, typeName, bio, upload, defaultPic }) {
+export default function RecipeReviewCard({ name, typeName, bio, upload, defaultPic, handleMatch, handleDenial, userId, prospectId }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -108,11 +108,14 @@ export default function RecipeReviewCard({ name, typeName, bio, upload, defaultP
         <IconButton aria-label="don't match">
           <NotInterestedIcon
            className={classes.match}
+           onClick={handleDenial}
            />
         </IconButton>
         <IconButton aria-label="match">
         <FavoriteIcon
-        className={classes.match} />
+        className={classes.match}
+            onClick={handleMatch}
+         />
         </IconButton>
         </span>
         <IconButton

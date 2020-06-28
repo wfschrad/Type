@@ -17,6 +17,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { useAuth0 } from "../../react-auth0-spa";
 import MenuButton from "./NavMenu";
+import MenuList from '@material-ui/core/MenuList';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     inputRoot: {
-        color: 'inherit',
+        backgroundColor: 'rgb(0, 188, 212)',
     },
     inputInput: {
         padding: theme.spacing(1, 1, 1, 0),
@@ -110,13 +111,17 @@ export default function PrimarySearchAppBar() {
 
     const handleProfileClick = (ev) => {
         handleMenuClose(ev);
-        history.push('/profile');
+        history.push(`/profile/${user.id}`);
     }
 
     const handleLogout = (ev) => {
         localStorage.removeItem("custom_crafts_userObj");
         localStorage.removeItem("custom_crafts_userTWJ");
         logout();
+    }
+
+    const handleLogin = (ev) => {
+        history.push('/account');
     }
 
     const menuId = 'primary-search-account-menu';
@@ -130,10 +135,14 @@ export default function PrimarySearchAppBar() {
                 transformOrigin={{ vertical: 'top', horizontal: 'right' }}
                 open={isMenuOpen}
                 onClose={handleMenuClose}
-            >
-                <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </Menu>
+            >{user ?(
+                    <MenuList>
+                        <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                    </MenuList>
+            ) :     <MenuItem onClick={handleLogin}>Login</MenuItem>
+            }
+                </Menu>
         </>
 
     );
@@ -181,7 +190,7 @@ export default function PrimarySearchAppBar() {
 
     return (
         <div className={classes.grow}>
-            <AppBar position="static">
+            <AppBar style={{backgroundColor:'rgba(4, 0, 255, 0.438)'}} position="static">
                 <Toolbar>
                     <IconButton
                         edge="start"

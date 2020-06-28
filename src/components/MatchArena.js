@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import { useAuth0 } from "../react-auth0-spa";
 
 
 import { apiBaseUrl } from '../config';
@@ -32,7 +33,9 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 140
     },
     prospectRow: {
-        marginBotton: 30
+        display: 'flex',
+        justifyContent: 'center',
+        marginBottom: 30
     },
     threshForm: {
         display: 'flex',
@@ -43,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
     },
     formPaper: {
         width: '100%'
+    },
+    innerWrapper: {
+        display: 'flex',
+        justifyContent: 'center'
     }
 }))
 
@@ -53,6 +60,24 @@ export default function MatchArena() {
     const [activeProspect, setActiveProspect] = useState(null);
     const classes = useStyles();
 
+    const { user } = useAuth0();
+    const { getTokenSilently } = useAuth0();
+
+
+    const setMatch = async () => {
+        const token = await getTokenSilently();
+        console.log('set match hit');
+
+        const MATCH_QUERY = `
+            F
+        `;
+
+    }
+
+    const setDenial = async () => {
+        const token = await getTokenSilently();
+
+    }
 
 
 
@@ -108,10 +133,13 @@ export default function MatchArena() {
         //render material img cards of prospects
         //allow button selection (possibly add swipe functionality)
         //cards will need action listeners to persist user selection in db
-        <> {activeProspect &&
-            <Grid container className={classes.mainContainer} spacing={2}>
-                <Grid container className={classes.prospectRow} spacing={2}>
+        <> {(activeProspect && user) &&
+            <Grid container className={classes.mainContainer} spacing={1}>
+                <Grid container className={classes.prospectRow} spacing={1}>
                     <Grid item xs={2}></Grid>
+                    <div className={classes.innerWrapper}>
+
+                    </div>
                     <Grid item xs={4}>
                         <ProspectCard
                         name={activeProspect.preferredName}
@@ -119,25 +147,29 @@ export default function MatchArena() {
                         bio={activeProspect.bio}
                         upload={activeProspect.uploadedPhoto}
                         defaultPic={activeProspect.profilePhoto}
+                        setMatch={setMatch}
+                        setDenial={setDenial}
+                        userId={user.id}
+                        prospectId={activeProspect.id}
                         />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                         <ThreshForm
                         setMatchThreshold={setMatchThreshold}/>
                     </Grid>
-                    <Grid item xs={2}></Grid>
+                    <Grid item xs={4}></Grid>
                 </Grid>
-                <Grid container className={classes.formWrapper} spacing={2}>
+                {/* <Grid container className={classes.formWrapper} spacing={2}>
                 <Grid item xs={2}></Grid>
                 <Grid item xs={8}>
                 </Grid>
-                <Grid item xs={2}></Grid>
+                <Grid item xs={2}></Grid> */}
 
                     {/* <div className={classes.threshForm} spacing={2}> */}
                         {/* Radios here */}
 
                     {/* </div> */}
-                </Grid>
+                {/* {/* </Grid> */}
             </Grid>
 }
             {/* {prospects && prospects.map(prospect => (

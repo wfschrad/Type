@@ -4,6 +4,7 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo'
 import AlertTemplate from 'react-alert-template-basic'
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import { ContextProvider } from './Context';
 
 
 import AppBar from "./components/material_blocks/AppBar";
@@ -34,6 +35,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <AlertProvider template={AlertTemplate} position={'middle'} >
+        <ContextProvider>
 
         <Router history={history}>
           <header>
@@ -42,14 +44,15 @@ function App() {
           </header>
           <Switch>
             <Route path="/" exact component={Splash} />
-            <Route path="/socket" exact render={(props) => <SocketLayout {...props} title='Socket Bossin' />} />
-            <ProtectedRoute path="/match" exact component={MatchArena} />
+            {/* <ProtectedRoute exact path="/mingle" render={(props) => <SocketLayout {...props} title='Socket Bossin' />} /> */}
+            <ProtectedRoute exact path="/mingle" component={SocketLayout} />
+            <ProtectedRoute exact path="/match" component={MatchArena} />
             <Route path="/modal" component={Modal} />
             <Route path="/onboard" component={OnBoard} />
             <Route exact path="/success" component={Success} />
             <Route path="/home" component={Home} />
             <Route path="/upload" component={UploadFinal} />
-            <Route
+            <PrivateRoute
               exact
               path="/profile/:userId"
               render={(props) => <Profile {...props} />}
@@ -57,6 +60,7 @@ function App() {
             <PrivateRoute path="/account" component={Account} />
           </Switch>
         </Router>
+        </ContextProvider>
       </AlertProvider>
 
     </ApolloProvider>

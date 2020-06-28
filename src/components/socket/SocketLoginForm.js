@@ -51,7 +51,7 @@ export default class SocketLoginForm extends Component {
                     id='nickname'
                     value={nickname}
                     onChange={this.handleChange}
-                    placeHolder={'Username'}
+                    placeholder={'Username'}
                     />
                     <div className='error'>{error && error}</div>
                 </form>

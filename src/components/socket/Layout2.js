@@ -1,11 +1,9 @@
-// import './index.scss';
-import './socket2.css';
+import './socket.css';
 
 import React, { Component } from 'react';
 import io from 'socket.io-client';
-import { USER_CONNECTED, LOGOUT } from './events.js';
+import { USER_CONNECTED } from './events.js';
 
-import SocketLoginForm from './SocketLoginForm';
 import ChatContainer from './chats/ChatContainer';
 
 const socketUrl = 'http://localhost:8081';

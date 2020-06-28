@@ -92,7 +92,7 @@ export default class ChatContainer extends Component {
             let newUsers = difference(chat.users, removedUsers.map(user => user.name))
             return {
                 ...chats,
-                users: newChats
+                users: newUsers
             }
         });
         this.setState({ chats: newChats })

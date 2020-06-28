@@ -3,10 +3,14 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
+import { useHistory } from 'react-router-dom';
+
 
 
 export default function SimpleMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const history = useHistory();
+
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -14,6 +18,22 @@ export default function SimpleMenu() {
 
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleMatchClick = () => {
+        setAnchorEl(null);
+        console.log('match click')
+    };
+
+    const handleMingleClick = () => {
+        setAnchorEl(null);
+        console.log('mingle click')
+        history.push('/mingle')
+    };
+
+    const handleAccountClick = () => {
+        setAnchorEl(null);
+        console.log('account click')
     };
 
     return (
@@ -28,9 +48,9 @@ export default function SimpleMenu() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handleMatchClick}>Find Match</MenuItem>
+                <MenuItem onClick={handleMingleClick}>Mingle</MenuItem>
+                <MenuItem onClick={handleAccountClick}>My Account</MenuItem>
             </Menu>
         </div>
     );
