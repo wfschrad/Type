@@ -105,16 +105,18 @@ export default function RecipeReviewCard({ name, typeName, bio, upload, defaultP
       </CardContent>
       <CardActions disableSpacing>
           <span className={classes.decisionButtons}>
-        <IconButton aria-label="don't match">
+        <IconButton aria-label="don't match"
+        onClick={handleDenial}
+        >
           <NotInterestedIcon
            className={classes.match}
-           onClick={handleDenial}
            />
         </IconButton>
-        <IconButton aria-label="match">
+        <IconButton aria-label="match"
+            onClick={handleMatch}
+        >
         <FavoriteIcon
         className={classes.match}
-            onClick={handleMatch}
          />
         </IconButton>
         </span>

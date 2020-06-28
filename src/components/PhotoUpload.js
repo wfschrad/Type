@@ -14,10 +14,11 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
-            marginTop: 30,
+            // marginTop: 30,
             // minWidth: 400,
             // width: '60vw',
-            background: '#FAF5FB'
+            backgroundColor: 'rgba(91, 88, 248, 0.438)'
+
         },
     },
     form: {
@@ -30,10 +31,22 @@ const useStyles = makeStyles((theme) => ({
     },
     dropzone: {
         width: 600,
-        marginLeft: 20
+        marginLeft: 20,
+        padding: 20,
+        borderRadius: '10%'
+    },
+    dropzoneText: {
+        padding: 5,
+        paddingLeft: 10
     },
     leftEdge: {
         marginLeft: 30
+    },
+    uploadButton: {
+        fontWeight: 700,
+        borderRadius: '15%',
+        marginLeft: '30vh',
+        marginTop: 20
     }
 }));
 
@@ -119,15 +132,16 @@ export default function ProfileUpload() {
                                          })}
                                      >
                                          <input {...getInputProps()} />
-                                         <div className="dropzone-text">
-                                             <p >Drag/drop image, or click to select image</p>
+                                         <div className={classes.dropzoneText}>
+                                             <p >Edit Profile Photo: </p>
+                                             <p>Drag and drop image to upload, or click to select file</p>
                                          </div>
                                          {/* {/* <div style={{ paddingLeft: "10px" }}> */}
                                              {/* File: {fileNames.map(fileName => (
                                              <li key={fileName}>{fileName}</li>
                                          ))} */}
 
-                                             <div >Preview:</div>
+                                             <div style={{padding: 10}}>Preview:</div>
                                              {imageUrls.map(imageUrl => (
                                                  <img className={classes.preview} alt={'uploadedImage'} key={imageUrl} src={imageUrl}  />
                                              ))}
@@ -138,8 +152,8 @@ export default function ProfileUpload() {
                              }
                          </Dropzone>
                      {/* </Paper> */}
-                     <Button type="submit" variant="contained">
-                         Post
+                     <Button className={classes.uploadButton} type="submit" variant="contained">
+                         Upload
                      </Button>
 
 

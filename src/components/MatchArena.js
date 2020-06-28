@@ -67,11 +67,36 @@ export default function MatchArena() {
     const setMatch = async () => {
         const token = await getTokenSilently();
         console.log('set match hit');
-
+        debugger;
         const MATCH_QUERY = `
-            F
+            mutation {
+                addMatch(user1: ${user.id}, user2: ${activeProspect.id}) {
+                    id
+                    preferredName
+                }
+            }
         `;
+        //post to db
 
+        const matchRes = await Axios({
+            url: apiBaseUrl,
+            method: 'post',
+            // headers: {
+            //     Authorization: `Bearer ${token}`,
+            // },
+            data: {
+                query: MATCH_QUERY
+            }
+        });
+        debugger
+        console.log('matchRes.data.data: ', matchRes.data.data);
+        const matchData = matchRes.data.data.addMatch;
+        // if (fetchedProspects && fetchedProspects.length > 0) {
+        //     setActiveProspect(fetchedProspects[0]);
+        //     setProspects(fetchedProspects.slice(1));
+        // }
+            //setMatches in context
+            //set new activeProspect after post
     }
 
     const setDenial = async () => {
@@ -147,8 +172,8 @@ export default function MatchArena() {
                         bio={activeProspect.bio}
                         upload={activeProspect.uploadedPhoto}
                         defaultPic={activeProspect.profilePhoto}
-                        setMatch={setMatch}
-                        setDenial={setDenial}
+                        handleMatch={setMatch}
+                        handleDenial={setDenial}
                         userId={user.id}
                         prospectId={activeProspect.id}
                         />

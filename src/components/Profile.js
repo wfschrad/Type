@@ -115,8 +115,8 @@ const Profile = ({ match: { params: { userId }}}) => {
                             <div style={{marginTop: '10px'}}><span className={classes.infoHeading}>Bio: </span>{typeUser.bio}</div>
                         </div>
 
-                </div>
-            </div>
+                    </div>
+        </div>
     )
 }
 

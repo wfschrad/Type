@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+
+
 import Modal from '@material-ui/core/Modal';
+import TextField from 'material-ui/TextField';
 
 import TypingForm from '../PTypeForm/TypingForm';
 
@@ -30,13 +35,34 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'auto',
         maxHeight: '100%'
     },
+    modalButton: {
+        borderRadius: '15%',
+        backgroundColor: 'yellow',
+        '&:hover': {
+            backgroundColor: 'blue'
+        }
+    },
+    formButton: {
+        '&:hover': {
+            backgroundColor: 'rgb(0, 188, 212)',
+        }
+    }
 }));
 
-export default function SimpleModal() {
+export default function SimpleModal({ user }) {
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
-    const [modalStyle] = React.useState(getModalStyle);
-    const [open, setOpen] = React.useState(false);
+    const [modalStyle] = useState(getModalStyle);
+    const [open, setOpen] = useState(false);
+    const [name, setName] = useState(user.preferredName);
+
+    const handleChange = () => {
+
+    }
+
+    const handleSubmit = () => {
+
+    }
 
     const handleOpen = () => {
         setOpen(true);
@@ -48,19 +74,53 @@ export default function SimpleModal() {
 
     const body = (
         <div style={modalStyle} className={classes.paper}>
-            <h2 id="simple-modal-title">Text in a modal</h2>
-            <p id="simple-modal-description">
-                <TypingForm/>
-      </p>
-            <SimpleModal />
+            <h2 id="simple-modal-title">Update Profile Info</h2>
+            <MuiThemeProvider>
+                <form>
+            <TextField
+                hintText="Enter Your First Name"
+                floatingLabelText="First Name"
+                onChange={handleChange('prefName')}
+                defaultValue={user.preferredName}
+                />
+                <br/>
+                <TextField
+                hintText="Enter Your Age"
+                floatingLabelText="Age"
+                onChange={handleChange('age')}
+                defaultValue={user.age}
+                />
+                <br/>
+                <TextField
+                hintText="Enter Your Gender"
+                floatingLabelText="Gender"
+                onChange={handleChange('gender')}
+                defaultValue={user.gender}
+                />
+                <br/>
+                <TextField
+                hintText="Enter Your Bio"
+                floatingLabelText="Bio"
+                onChange={handleChange('bio')}
+                defaultValue={user.bio}
+                />
+                <RaisedButton
+                className={classes.formButton}
+                onClick={handleSubmit}
+                >
+                    Update
+                </RaisedButton>
+                                </form>
+
+                </MuiThemeProvider>
         </div>
     );
 
     return (
         <div>
-            <button type="button" onClick={handleOpen}>
-                Open Modal
-      </button>
+            <button className={classes.modalButton} type="button" onClick={handleOpen}>
+                Edit Biographical Information
+            </button>
             <Modal
                 open={open}
                 onClose={handleClose}
