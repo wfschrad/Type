@@ -12,17 +12,44 @@ const useStyles = makeStyles((theme) => ({
         width: 360,
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-end'
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginLeft: 30,
     },
     mainContainer: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
+        // alignItems: 'center',
         marginTop: 60
     },
     picGrid: {
-        marginLeft: 140
+        marginLeft: 140,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center'
+    },
+    userName: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        marginTop: 10,
+        fontWeight: 700,
+        marginLeft: 140,
+        fontSize: 18
+    },
+    typeHead: {
+        display: 'flex',
+        justifyContent: 'center',
+        fontWeight: 700,
+        marginBottom: 20,
+        marginTop: 20
+
+    },
+    contentBottom: {
+        marginLeft: 30
+    },
+    infoHeading: {
+        fontWeight: 700
     }
 }))
 
@@ -72,20 +99,24 @@ const Profile = ({ match: { params: { userId }}}) => {
     },[]);
 
     return typeUser && (
-        <Grid container className={classes.mainContainer} spacing={2}>
-            <Grid item xs={12}>
-                <Grid container className={classes.picGrid}>
-                    <Grid item xs={5} >
-                        <img src={typeUser.uploadedPhoto} alt="Profile" width="360" height="360" />
-                    </Grid>
-                    <Grid className={classes.contentBox} item xs={7}>
-                        <div>{typeUser.PType.name}</div>
-                        <div>{typeUser.PType.description}</div>
+        <div className={classes.mainContainer} >
+                <div className={classes.picGrid}>
+                    <img src={typeUser.uploadedPhoto} alt="Profile" width="360" height="360" />
+                    <div className={classes.userName}>{typeUser.preferredName}</div>
+                </div>
 
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Grid>
+                    <div className={classes.contentBox} >
+                        <div>
+                            <div className={classes.typeHead}>{typeUser.PType.name.toUpperCase()}</div>
+                            <div>{typeUser.PType.description}</div>
+                        </div>
+                        <div className={classes.contentBottom}>
+                            <div><span className={classes.infoHeading}>Age: </span>{typeUser.age}</div>
+                            <div style={{marginTop: '10px'}}><span className={classes.infoHeading}>Bio: </span>{typeUser.bio}</div>
+                        </div>
+
+                </div>
+            </div>
     )
 }
 

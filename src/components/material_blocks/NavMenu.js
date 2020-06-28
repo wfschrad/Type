@@ -23,6 +23,8 @@ export default function SimpleMenu() {
     const handleMatchClick = () => {
         setAnchorEl(null);
         console.log('match click')
+        history.push('/match')
+
     };
 
     const handleMingleClick = () => {
@@ -34,6 +36,8 @@ export default function SimpleMenu() {
     const handleAccountClick = () => {
         setAnchorEl(null);
         console.log('account click')
+        history.push('/account')
+
     };
 
     return (

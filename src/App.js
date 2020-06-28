@@ -17,7 +17,7 @@ import Account from "./components/Account";
 import Modal from "./components/material_blocks/Modal";
 import Home from "./components/Home";
 import OnBoard from "./components/OnBoard";
-import UploadFinal from "./components/PhotoUploadFinal";
+import UploadFinal from "./components/PhotoUpload";
 import SocketLayout from "./components/socket/Layout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Success from './components/PTypeForm/Success';
