@@ -11,7 +11,7 @@
     "@testing-library/user-event": "^7.2.1",
     "apollo-boost": "^0.4.9",
     "aws-sdk": "^2.701.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "graphql": "^15.1.0",
     "graphql-tag": "^2.10.3",
     "lodash": "^4.17.15",
