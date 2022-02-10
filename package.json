@@ -18,7 +18,7 @@
     "material-ui": "^0.20.2",
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-alert": "^7.0.1",
     "react-alert-template-basic": "^1.0.0",
